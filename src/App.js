@@ -5,6 +5,7 @@ import VideoDetail from './components/VideoDetail';
 import useVideos from './hooks/useVideos';
 
 // Vercel Deployment: https://videos-hooks-sand-theta.vercel.app/
+// Netligy Deployment: https://competent-ride-005420.netlify.app/
 
 const App = () => {
 
