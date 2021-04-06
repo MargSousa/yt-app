@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import SearchBar from './components/SearchBar';
+import VideoList from './components/VideoList';
+import VideoDetail from './components/VideoDetail';
+import useVideos from './hooks/useVideos';
 
-function App() {
+// Vercel Deployment: https://videos-hooks-sand-theta.vercel.app/
+
+const App = () => {
+
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, search] = useVideos('News');
+
+  useEffect(() => {
+    setSelectedVideo(videos[0]);
+  }, [videos]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App ui container">
+      <SearchBar search={search} />
+      <div className="ui grid">
+        <div className="ui row">
+          <div className="eleven wide column">
+            <VideoDetail selectedVideo={selectedVideo} />
+          </div>
+          <div className="five wide column">
+            <VideoList videos={videos} onVideoSelect={setSelectedVideo} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
